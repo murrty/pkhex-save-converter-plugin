@@ -44,27 +44,21 @@ namespace SaveConverter {
                 if (ofd.ShowDialog() == DialogResult.OK) {
                     string saveFile = ofd.FileName;
                     if (File.Exists(saveFile)) {
-                        try {
-                            if (saveFile.EndsWith("dsv")) {
-                                // Open DesMuME save with filestream and trim the last 122 bytes of the file, which is the desmume footer
-                                using (var readSave = new FileStream(saveFile, FileMode.Open, FileAccess.Write)) {
-                                    readSave.SetLength(Math.Max(0, readSave.Length - 122));
-                                }
-                                File.Move(saveFile, saveFile.Substring(0, saveFile.Length - 3) + "sav");
+                        if (saveFile.EndsWith("dsv")) {
+                            // Open DesMuME save with filestream and trim the last 122 bytes of the file, which is the desmume footer
+                            using (var readSave = new FileStream(saveFile, FileMode.Open, FileAccess.Write)) {
+                                readSave.SetLength(Math.Max(0, readSave.Length - 122));
                             }
-                            else if (saveFile.EndsWith("sav")) {
-                                // Open  raw save with filestream and append the 122 bytes of the desmume footer
-                                using (var readSave = new FileStream(saveFile, FileMode.Append, FileAccess.Write)) {
-                                    readSave.Write(desmumeFooter, 0, desmumeFooter.Length);
-                                }
-                                File.Move(saveFile, saveFile.Substring(0, saveFile.Length - 3) + "dsv");
+                            File.Move(saveFile, saveFile.Substring(0, saveFile.Length - 3) + "sav");
+                        }
+                        else if (saveFile.EndsWith("sav")) {
+                            // Open  raw save with filestream and append the 122 bytes of the desmume footer
+                            using (var readSave = new FileStream(saveFile, FileMode.Append, FileAccess.Write)) {
+                                readSave.Write(desmumeFooter, 0, desmumeFooter.Length);
                             }
-
-
+                            File.Move(saveFile, saveFile.Substring(0, saveFile.Length - 3) + "dsv");
                         }
-                        catch (Exception ex) {
-                            MessageBox.Show(ex.ToString());
-                        }
+                        this.DialogResult = DialogResult.OK;
                     }
                 }
                 else { return; }
