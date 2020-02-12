@@ -47,7 +47,7 @@
             // 
             // btnConvert
             // 
-            this.btnConvert.Location = new System.Drawing.Point(139, 80);
+            this.btnConvert.Location = new System.Drawing.Point(139, 95);
             this.btnConvert.Name = "btnConvert";
             this.btnConvert.Size = new System.Drawing.Size(75, 23);
             this.btnConvert.TabIndex = 3;
@@ -58,7 +58,7 @@
             // 
             // btnExit
             // 
-            this.btnExit.Location = new System.Drawing.Point(265, 80);
+            this.btnExit.Location = new System.Drawing.Point(265, 95);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(75, 23);
             this.btnExit.TabIndex = 4;
@@ -69,21 +69,22 @@
             // 
             // lbDSInfo
             // 
-            this.lbDSInfo.Location = new System.Drawing.Point(12, 40);
+            this.lbDSInfo.Location = new System.Drawing.Point(12, 34);
             this.lbDSInfo.Name = "lbDSInfo";
-            this.lbDSInfo.Size = new System.Drawing.Size(328, 27);
+            this.lbDSInfo.Size = new System.Drawing.Size(328, 58);
             this.lbDSInfo.TabIndex = 5;
-            this.lbDSInfo.Text = "Only DS games can be converted (Gen 4 && Gen 5)\r\nThis will replace the file with " +
-    "the converted one.";
+            this.lbDSInfo.Text = "Drag + Drop files onto this form\r\n\r\nOnly DS games can be converted (Gen 4 && Gen " +
+    "5)\r\nThis will replace the file with the converted one.";
             this.lbDSInfo.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.lbDSInfo.Visible = false;
             // 
             // SaveConverter
             // 
+            this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(352, 115);
+            this.ClientSize = new System.Drawing.Size(352, 125);
             this.Controls.Add(this.lbDSInfo);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnConvert);
@@ -94,6 +95,8 @@
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DS Save Editor Converter";
+            this.DragDrop += new System.Windows.Forms.DragEventHandler(this.SaveConverter_DragDrop);
+            this.DragEnter += new System.Windows.Forms.DragEventHandler(this.SaveConverter_DragEnter);
             this.ResumeLayout(false);
 
         }
