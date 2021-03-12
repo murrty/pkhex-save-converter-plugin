@@ -78,7 +78,9 @@ namespace SaveConverter {
         private void SaveConverter_DragDrop(object sender, DragEventArgs e) {
             string[] draggedFiles = (string[])e.Data.GetData(DataFormats.FileDrop);
             if (draggedFiles.Length > 0) {
-                Convert(draggedFiles[0]);
+                for (int CurrentFileIndex = 0; CurrentFileIndex < draggedFiles.Length; CurrentFileIndex++){
+                    Convert(draggedFiles[CurrentFileIndex]);
+                }
             }
         }
     }
